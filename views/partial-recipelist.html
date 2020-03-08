@@ -1,0 +1,5 @@
+<ul class="recipeNameList">
+    ${recipeNames.map(recipe => {
+        return `<li><a href="recipelist/${recipe.id}">${recipe.name}</a></li>`;
+    }).join('')}
+</ul>

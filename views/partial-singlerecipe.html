@@ -1,0 +1,11 @@
+<a href="/recipelist">Back</a>
+<h2>Ingredients:</h2>
+<ol >
+    ${recipeInfo[0].ingredients.split(',').map(item => {
+        return `<li class="listedItems">${item}</li>`;
+    }).join('')}
+</ol>
+<div>
+    <h2>Directions:</h2>
+    <p>${recipeInfo[0].directions}</p>
+</div>
