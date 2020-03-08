@@ -6,6 +6,13 @@ tags: []
 
 # Recipe database with user log in/register.
 
---The User can comment and rate recipes while logged in.
---Users can add their own recipes to the database if they are registered and logged in.
---
+
+--------------------------------------------
+
+
+The User can comment and rate recipes while logged in.
+
+Users can add their own recipes to the database if they are registered and logged in.
+
+
+--------------------------------------------
