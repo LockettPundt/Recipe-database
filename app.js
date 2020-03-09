@@ -2,6 +2,7 @@ const express = require('express'),
     session = require('express-session'),
     FileStore = require('session-file-store')(session),
     path = require('path'),
+    bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     es6Renderer = require('express-es6-template-engine'),
     logger = require('morgan');
