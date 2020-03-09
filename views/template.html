@@ -10,11 +10,20 @@
         <link rel="stylesheet" href="/stylesheets/style.css">
     </head>
     <body>
-       
+       <nav class="navBar">
+           
+           ${!!session.is_logged_in ? `
+                <a>Hi, ${session.first_name}</a>
+                <a href="/users/logout">Log Out</a>
+            ` : `<a href="/users/login">Sign In</a>
+                <a href="/users/register">Register</a>`
+            }
+            <a href="/">Home</a>
+            <a href="javascript:history.back()">Back</a>
+       </nav>
        <section class="innerContent">
-        <h1 class="pageTitle">${title}</h1>
+        <h2 class="pageTitle">${title}</h2>
            ${partial}
-        <a href="/">Home</a>
        </section>
 
         

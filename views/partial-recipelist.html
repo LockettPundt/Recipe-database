@@ -1,5 +1,39 @@
-<ul class="recipeNameList">
-    ${recipeNames.map(recipe => {
-        return `<li><a href="recipelist/${recipe.id}">${recipe.name}</a></li>`;
-    }).join('')}
-</ul>
+
+
+${!!session.is_logged_in ? `
+    <ul class="recipeNameList">
+            ${recipeNames.map((recipe, index) => {
+                return `<li><img src="/images/${recipe.img}" class="imgThumbnail"><a href="recipelist/${recipe.id}">${recipe.name}</a></li>`;
+            }).join('')}
+    </ul>
+    
+
+<!-- enctype="multipart/form-data" on the form to accept file up loads but i'll need to work on it-->
+
+    <form class="forms" action="recipelist"  method="POST" autocomplete="off">
+        <h2>Submit A Recipe:</h2>
+        <input type="hidden" name="user_id" value="${session.user_id}">
+        <input type="hidden" name="first_name" value="${session.first_name}">
+        <input type="hidden" name="last_name" value="${session.last_name}">
+        <label>Recipe Title:
+            <input type="text" name="title" placeholder="Recipe Title">
+        </label>
+        <label>Rating: 
+            <input type="text" name="rating" placeholder="Rate This Recipe">
+        </label>
+        <label>Ingredients: 
+            <textarea name="ingredients" placeholder="Seperated by commas please ;)" rows="10" cols="40"></textarea>
+        </label>
+        <label>Directions: 
+            <textarea name="directions" placeholder="Enter Your Directions" rows="10" cols="40"></textarea>
+        </label>
+        <label>Image: 
+            <input type="file" name="img_upload">
+        </label>
+        <button type="submit">Submit Recipe</button>
+    </form>
+    ` : `<p>Please <a href="/users/login">Log In</a></p>
+         <p>Or <a href="/users/register">Register</a></p>
+         <p>to browse.</p>`
+
+}

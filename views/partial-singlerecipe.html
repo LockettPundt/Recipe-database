@@ -1,11 +1,47 @@
-<a href="/recipelist">Back</a>
-<h2>Ingredients:</h2>
-<ol >
-    ${recipeInfo[0].ingredients.split(',').map(item => {
-        return `<li class="listedItems">${item}</li>`;
-    }).join('')}
-</ol>
-<div>
-    <h2>Directions:</h2>
-    <p>${recipeInfo[0].directions}</p>
-</div>
+
+${!!session.is_logged_in ? `
+    <h3>Submitted by: ${submittedBy[0].first_name} ${submittedBy[0].last_name}</h3>
+    <figure>
+        <img class="recipeSoloImg" src="/images/${recipeInfo[0].img}"/>
+    </figure>
+
+    <h2>Ingredients:</h2>
+
+    <ol >
+        ${recipeInfo[0].ingredients.split(',').map(item => {
+            return `<li class="listedItems">${item}</li>`;
+        }).join('')}
+    </ol>
+    <div class="directions">
+        <h2>Directions:</h2>
+        <p>${recipeInfo[0].directions}</p>
+    </div>
+    <section class="commentSection">
+        ${comments.length ? `
+            ${comments.map(comment => {
+                const stars = "★".repeat(comment.rating);
+                return `<div class="comment">
+                    <p>${comment.title} <span class="stars">${stars}</span></p>
+                    <p>By: ${commenter.first_name} ${commenter.last_name}</p>
+                    <p>${comment.comment}</p>
+                </div>`
+            }).join('')}
+        ` : `<h3>Be the first to leave a comment!</h3>`
+    }
+        <form class="forms" action="/recipelist/${recipeInfo[0].id}" method="POST">
+            <h3>Leave a comment: </h3>
+            <input type="hidden" name="user_id" value="${session.user_id}">
+            <label>Title:
+                <input type="text" name="title" placeholder="Comment Title">
+            </label>
+            <label>Rating: 
+                <input type="text" name="rating" placeholder="Rate it!">
+            </label>
+            <label>Comment:
+                <textarea rows="10" cols="40" name="comment" placeholder="Enter Your Comment."></textarea>
+            </label>
+            <button type="submit">Comment!</button>
+        </form>
+    </section>
+    ` : `<p>Please <a href="/users/login">Log In</p>`
+}
