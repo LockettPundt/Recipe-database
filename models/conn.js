@@ -1,8 +1,9 @@
 'use strict'
+require('dotenv').config();
 
 const options = {
-    host: 'localhost',
-    database: 'recipeblog'
+    host: process.env['DB_HOST'],
+    database: process.env['DB_NAME']
 }
 
 
