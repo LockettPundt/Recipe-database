@@ -47,6 +47,24 @@ class UserModel {
             return error;
         }
     }
+
+    static async leaveComment(title, comment, rating, users_id, recipes_id) {
+        try {
+            const response = await db.one(`INSERT INTO comments (title, comment, rating, users_id, recipes_id) 
+            VAlUES ($1, $2, $3, $4, $5) RETURNING id`, [title, comment, rating, users_id, recipes_id]);
+            return response;
+        } catch (error) {
+            return error;
+        }
+    }
+    static async getCommenter(id) {
+        try {
+            const response = await db.one(`SELECT * FROM users WHERE id = ${id};`);
+            return response;
+        } catch (error) {
+            return error;
+        }
+    }
 }
 
 module.exports = UserModel;
