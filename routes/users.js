@@ -13,7 +13,8 @@ let emailStatus = '';
 router.get('/', async (req, res, next) => {
   res.render('template', {
     locals: {
-      title: 'User Log in'
+      title: 'User Log in',
+      session: req.session
     },
     partials: {
       partial: 'partial-users'
@@ -25,7 +26,8 @@ router.get('/', async (req, res, next) => {
 router.get('/login', async (req, res) => {
   res.render('template', {
     locals: {
-      title: 'Log in'
+      title: 'Log in',
+      session: req.session
     },
     partials: {
       partial: 'partial-login'
@@ -38,7 +40,8 @@ router.get('/register', async (req, res) => {
   res.render('template', {
     locals: {
       title: 'Register',
-      email: emailStatus
+      email: emailStatus,
+      session: req.session
     },
     partials: {
       partial: 'partial-register'
@@ -61,7 +64,8 @@ router.post('/register', async (req, res) => {
     res.render('template', {
       locals: {
         title: 'Register',
-        email: emailStatus
+        email: emailStatus,
+        session: req.session
       },
       partials: {
         partial: 'partial-register'
@@ -81,7 +85,7 @@ router.post('/login', async (req, res) => {
   console.log('login response is: ', response);
   if (!!response.isValid) {
     req.session.is_logged_in = response.isValid;
-    //req.session.id = response.id;
+    req.session.user_id = response.id;
     req.session.first_name = response.first_name;
     req.session.last_name = response.last_name;
     res.redirect(200, '/');
@@ -89,4 +93,19 @@ router.post('/login', async (req, res) => {
     res.redirect(403, '/users/login');
   }
 })
+
+router.get('/logout', async (req, res) => {
+  res.render('template', {
+    locals: {
+      title: `GoodBye ${req.session.first_name}.`,
+      session: req.session
+    },
+    partials: {
+      partial: 'partial-logout'
+    }
+  })
+  req.session.destroy()
+})
+
+
 module.exports = router;
