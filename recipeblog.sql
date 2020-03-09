@@ -8,6 +8,8 @@ CREATE TABLE recipes (
     rating int CHECK (rating > 0 AND rating < 6),
     directions VARCHAR,
     ingredients VARCHAR
+    img VARCHAR,
+    submit_id int
 );
 
 CREATE TABLE comments (
