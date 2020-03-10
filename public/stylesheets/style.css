@@ -8,22 +8,25 @@ body {
   margin:0;
   padding: 5vw;
   font: 16px Helvetica, Arial, sans-serif;
-  background-image: linear-gradient(180deg ,white, rgb(176, 200, 228));
+  /* background-image: linear-gradient(180deg ,white, rgb(176, 200, 228)); */
   height: 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: rgb(36, 35, 35);
+  color: white;
 }
 
 .forms textarea {
+  background-color: lightgray;
   width: 100%;
   margin: 1vh 0vh;
   border: none;
+
 }
 
 .commentSection {
   border-radius: 0.7vh;
-  background-color: rgb(230, 217, 217);
+  background-color: white;
+  color: rgb(36, 35, 35);
   padding: 1vh 1vw;
 }
 
@@ -32,7 +35,7 @@ body {
 }
 
 .navBar {
-  background-color: #79cc7b;
+  background-color: rgb(36, 35, 35);
   width: 50%;
   border-radius: 0.7vh;
   margin: 2vh auto;
@@ -44,7 +47,7 @@ a {
   margin: 0vw 1vw 0vw 0vw;
   padding-left: 1vw;
   text-decoration: none;
-  color: #b679cc;
+  color: whitesmoke;
 }
 
 li {
@@ -82,6 +85,7 @@ li {
 }
 
 .forms input {
+  background-color: lightgrey;
   margin: 1vh 0vh;
   border: none;
   width: 100%;
@@ -100,12 +104,12 @@ p {
   border-radius: 0.7vh;
   width: 50%;
   margin: auto;
-  background-color: #c3d4e8;
+  background-color: rgb(36, 35, 35);
   padding: 1vh 2vw;
 }
 
 button {
   color: white;
   border-radius: 0,7vh;
-  background-color: rgb(121, 160, 204);
+  background-color: rgb(36, 35, 35);
 }
