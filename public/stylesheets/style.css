@@ -22,7 +22,7 @@ body {
 }
 
 .commentSection {
-  border-radius: 1vh;
+  border-radius: 0.7vh;
   background-color: rgb(230, 217, 217);
   padding: 1vh 1vw;
 }
@@ -32,15 +32,19 @@ body {
 }
 
 .navBar {
+  background-color: #79cc7b;
   width: 50%;
+  border-radius: 0.7vh;
   margin: 2vh auto;
+  padding: 2vh 2vw;
 }
 
 a {
   font-size: 1.6rem;
   margin: 0vw 1vw 0vw 0vw;
+  padding-left: 1vw;
   text-decoration: none;
-  color: #79cc7b;
+  color: #b679cc;
 }
 
 li {
@@ -93,7 +97,7 @@ p {
 }
 
 .innerContent {
-  border-radius: 1vh;
+  border-radius: 0.7vh;
   width: 50%;
   margin: auto;
   background-color: #c3d4e8;
@@ -102,5 +106,6 @@ p {
 
 button {
   color: white;
+  border-radius: 0,7vh;
   background-color: rgb(121, 160, 204);
 }
