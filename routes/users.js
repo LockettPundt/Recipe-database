@@ -1,89 +1,85 @@
-'use strict'
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
+
 const express = require('express');
+
 const router = express.Router();
-const userModel = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const UserModel = require('../models/userModel');
 
 
 let emailStatus = '';
-
-
 
 
 router.get('/', async (req, res, next) => {
   res.render('template', {
     locals: {
       title: 'User Log in',
-      session: req.session
+      session: req.session,
     },
     partials: {
-      partial: 'partial-users'
-    }
+      partial: 'partial-users',
+    },
   });
-  //res.send('respond with a resource');
+  // res.send('respond with a resource');
 });
 
 router.get('/login', async (req, res) => {
   res.render('template', {
     locals: {
       title: 'Log in',
-      session: req.session
+      session: req.session,
     },
     partials: {
-      partial: 'partial-login'
-    }
-  })
-})
+      partial: 'partial-login',
+    },
+  });
+});
 
 router.get('/register', async (req, res) => {
-
   res.render('template', {
     locals: {
       title: 'Register',
       email: emailStatus,
-      session: req.session
+      session: req.session,
     },
     partials: {
-      partial: 'partial-register'
-    }
-  })
-})
+      partial: 'partial-register',
+    },
+  });
+});
 
 router.post('/register', async (req, res) => {
-  const {first_name, last_name, user_email, user_password} = req.body;
+  const {
+    first_name, last_name, user_email, user_password,
+  } = req.body;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(user_password, salt);
-  const newUser = new userModel(null, first_name, last_name, user_email, hash);
+  const newUser = new UserModel(null, first_name, last_name, user_email, hash);
   const checkEmail = await newUser.existingEmail();
-  //console.log(checkEmail);
   if (!checkEmail) {
     newUser.createUser();
     res.redirect(200, '/');
   } else {
-    emailStatus = `This email address is already registered.`;
+    emailStatus = 'This email address is already registered.';
     res.render('template', {
       locals: {
         title: 'Register',
         email: emailStatus,
-        session: req.session
+        session: req.session,
       },
       partials: {
-        partial: 'partial-register'
-      }
-    })
+        partial: 'partial-register',
+      },
+    });
   }
-  console.log(newUser);
-  
-})
+});
 
 router.post('/login', async (req, res) => {
-  const {user_email, user_password} = req.body;
-  console.log(req.body);
-  const user = new userModel(null, null, null, user_email, user_password);
-  console.log(user);
+  const { user_email, user_password } = req.body;
+  const user = new UserModel(null, null, null, user_email, user_password);
   const response = await user.logIn();
-  console.log('login response is: ', response);
-  if (!!response.isValid) {
+  if (response.isValid) {
     req.session.is_logged_in = response.isValid;
     req.session.user_id = response.id;
     req.session.first_name = response.first_name;
@@ -92,20 +88,20 @@ router.post('/login', async (req, res) => {
   } else {
     res.redirect(403, '/users/login');
   }
-})
+});
 
 router.get('/logout', async (req, res) => {
   res.render('template', {
     locals: {
       title: `GoodBye ${req.session.first_name}.`,
-      session: req.session
+      session: req.session,
     },
     partials: {
-      partial: 'partial-logout'
-    }
-  })
-  req.session.destroy()
-})
+      partial: 'partial-logout',
+    },
+  });
+  req.session.destroy();
+});
 
 
 module.exports = router;
